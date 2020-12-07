@@ -1,0 +1,11 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install curl -y --allow-downgrades --allow-remove-essential
+RUN curl -O https://storage.googleapis.com/golang/go1.13.5.linux-amd64.tar.gz
+RUN tar -xvf go1.13.5.linux-amd64.tar.gz
+RUN mv go /usr/local
+WORKDIR /var/www/
+RUN echo 'PATH=$PATH:/usr/local/go/bin' > ~/.profile
+RUN /bin/bash -c "source ~/.profile" && echo $PATH
+
