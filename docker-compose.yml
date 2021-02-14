@@ -7,3 +7,5 @@ services:
       - .:/var/app
     tty: true
     working_dir: /var/app
+    ports: 
+      - 8080:8080
