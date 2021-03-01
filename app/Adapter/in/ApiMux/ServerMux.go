@@ -1,8 +1,8 @@
-package Api
+package ApiMux
 
 import (
 	"fmt"
-	"github.com/Enrikerf/goApiKerf/app/Adapter/in/Api/Controllers"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiMux/Controllers"
 	"github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Seeds"
 	"github.com/joho/godotenv"
 	"log"

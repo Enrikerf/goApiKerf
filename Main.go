@@ -1,7 +1,10 @@
 package main
 
-import "github.com/Enrikerf/goApiKerf/app/Adapter/in/Api"
+import (
+	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiGin"
+)
 
 func main() {
-	Api.Run()
+	//ApiMux.Run()
+	ApiGin.Run()
 }

@@ -1,6 +1,6 @@
 package Controllers
 
-import "github.com/Enrikerf/goApiKerf/app/Adapter/in/Api/Middlewares"
+import "github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiMux/Middlewares"
 
 func (s *Server) initializeRoutes() {
 

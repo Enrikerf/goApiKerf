@@ -2,7 +2,7 @@ package ModelsTests
 
 import (
 	"fmt"
-	"github.com/Enrikerf/goApiKerf/app/Adapter/in/Api/Controllers"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiMux/Controllers"
 	"github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Models"
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"

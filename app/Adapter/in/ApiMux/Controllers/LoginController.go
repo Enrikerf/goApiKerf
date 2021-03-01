@@ -2,9 +2,9 @@ package Controllers
 
 import (
 	"encoding/json"
-	"github.com/Enrikerf/goApiKerf/app/Adapter/in/Api/Auth"
-	"github.com/Enrikerf/goApiKerf/app/Adapter/in/Api/Responses"
-	"github.com/Enrikerf/goApiKerf/app/Adapter/in/Api/Utils/FormatError"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiMux/Auth"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiMux/Responses"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiMux/Utils/FormatError"
 	"github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Models"
 	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"

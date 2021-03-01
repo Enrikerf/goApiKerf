@@ -1,7 +1,7 @@
 package Controllers
 
 import (
-	"github.com/Enrikerf/goApiKerf/app/Adapter/in/Api/Responses"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiMux/Responses"
 	"net/http"
 )
 
