@@ -7,14 +7,14 @@ import (
 	"net/http"
 )
 
-type ServerGin struct {
+type ApiGin struct {
 	Engine * gin.Engine
  }
 
-func (serverGin *ServerGin) Run(){
-		serverGin.Engine = gin.Default()
-		Config.Routes(serverGin.Engine)
-		serverGin.Engine.Run(":8081")
+func (apiGin *ApiGin) Run(){
+		apiGin.Engine = gin.Default()
+		Config.Routes(apiGin.Engine)
+		apiGin.Engine.Run(":8081")
 }
 
 func pong(context *gin.Context) {

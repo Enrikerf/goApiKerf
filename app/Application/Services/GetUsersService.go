@@ -1,9 +1,14 @@
 package Services
 
-type GetUsersService struct {
+import (
+	"github.com/Enrikerf/goApiKerf/app/Application/Port/out/Database/Users"
+)
 
+type GetUsersService struct {
+	UsersPort Users.GetUsersPort
 }
 
 func (service GetUsersService) Get() string {
-	return "hello"
+	var getUserPort = service.UsersPort
+	return getUserPort.Get()
 }

@@ -2,7 +2,8 @@ package Controllers
 
 import (
 	"fmt"
-	"github.com/Enrikerf/goApiKerf/app/Config/Injection/Adapter"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Adapter"
+	"github.com/Enrikerf/goApiKerf/app/Application/Services"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -17,9 +18,10 @@ func LoadUserControllerEndpoints(router *gin.Engine) {
 
 
 func getUsers(context *gin.Context) {
-	var getUserQuery = Adapter.GetUsersQuery()
+	var getUserAdapter = Adapter.GetUsersAdapter{}
+	var service = Services.GetUsersService{UsersPort: getUserAdapter}
 
-	context.String(http.StatusOK, fmt.Sprintf(getUserQuery.Get()))
+	context.String(http.StatusOK, fmt.Sprintf(service.Get()))
 }
 
 

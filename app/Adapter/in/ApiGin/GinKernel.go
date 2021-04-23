@@ -1,7 +1,7 @@
 package ApiGin
 
-var  serverGin = ServerGin{}
+var  apiGin = ApiGin{}
 
 func Run() {
-	serverGin.Run()
+	apiGin.Run()
 }
