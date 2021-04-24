@@ -20,7 +20,9 @@ func (userController UserController) LoadUserControllerEndpoints(router *gin.Eng
 }
 
 func (userController UserController) getUsers(context *gin.Context) {
-	context.String(http.StatusOK, fmt.Sprintf(userController.GetUsersUseCase.Get()))
+	var users = userController.GetUsersUseCase.Get()
+	fmt.Println("{}", users)
+	context.JSON(http.StatusOK, users)
 }
 
 func (userController UserController) postUsers(context *gin.Context) {

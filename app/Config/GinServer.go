@@ -1,17 +1,33 @@
 package Config
 
 import (
-	"github.com/Enrikerf/goApiKerf/app/Config/Routes"
-	"github.com/gin-gonic/gin"
+	"fmt"
+	"github.com/joho/godotenv"
+	"log"
+	"os"
 )
 
-type ApiGin struct {
-	Engine * gin.Engine
+type Server struct {
+	ApiGin ApiGin
 }
 
-func (apiGin *ApiGin) Run(){
-	apiGin.Engine = gin.Default()
-	Routes.ConfigUserRoutes(apiGin.Engine)
-	apiGin.Engine.Run(":8081")
-}
+func (server *Server) Run() {
+	server.ApiGin = ApiGin{}
+	var err = godotenv.Load()
 
+	if err != nil {
+		log.Fatalf("Error getting env, not comming through %v", err)
+	} else {
+		fmt.Println("We are getting the env values")
+	}
+
+	server.ApiGin.Initialize(
+		os.Getenv("SERVER_PORT"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_NAME"),
+	)
+	server.ApiGin.Run()
+}

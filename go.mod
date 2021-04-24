@@ -7,8 +7,8 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/golang/protobuf v1.4.3 // indirect
-	github.com/google/wire v0.5.0
 	github.com/gorilla/mux v1.8.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.3.0
@@ -22,4 +22,6 @@ require (
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gorm.io/driver/mysql v1.0.5
+	gorm.io/gorm v1.21.8
 )
