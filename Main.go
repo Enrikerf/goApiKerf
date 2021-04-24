@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/Enrikerf/goApiKerf/app/Adapter/in/ApiGin"
+	"github.com/Enrikerf/goApiKerf/app/Config"
 )
 
 func main() {
 	//ApiMux.Run()
-	ApiGin.Run()
+	var apiGin = Config.ApiGin{}
+	apiGin.Run()
 }

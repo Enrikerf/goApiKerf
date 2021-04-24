@@ -2,29 +2,27 @@ package Controllers
 
 import (
 	"fmt"
-	"github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Adapter"
-	"github.com/Enrikerf/goApiKerf/app/Application/Services"
+	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/GetUsersUseCase"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-func LoadUserControllerEndpoints(router *gin.Engine) {
+type UserController struct {
+	GetUsersUseCase GetUsersUseCase.Query
+}
+
+func (userController UserController) LoadUserControllerEndpoints(router *gin.Engine) {
 	v1 := router.Group("/users")
 	{
-		v1.GET("", getUsers)
-		v1.POST("", postUsers)
+		v1.GET("", userController.getUsers)
+		v1.POST("", userController.postUsers)
 	}
 }
 
-
-func getUsers(context *gin.Context) {
-	var getUserAdapter = Adapter.GetUsersAdapter{}
-	var service = Services.GetUsersService{UsersPort: getUserAdapter}
-
-	context.String(http.StatusOK, fmt.Sprintf(service.Get()))
+func (userController UserController) getUsers(context *gin.Context) {
+	context.String(http.StatusOK, fmt.Sprintf(userController.GetUsersUseCase.Get()))
 }
 
-
-func postUsers(context *gin.Context) {
+func (userController UserController) postUsers(context *gin.Context) {
 	context.String(http.StatusOK, fmt.Sprintf("creando user"))
 }
