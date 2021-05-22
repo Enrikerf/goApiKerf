@@ -1,5 +1,19 @@
 
 
+To compile on debug mode
+reference: [attach debbuger](https://www.jetbrains.com/help/go/attach-to-running-go-processes-with-debugger.html)
+
+> go build -gcflags="-N -l" -o debugApp.sh
+
+if the name is app the compiled will be named /app/goApiKerf (the name of de project)
+
+
+
+
+
+
+
+------------------------
 docker build . -t go --> will use Dockerfile
 
 docker run -it --name go go

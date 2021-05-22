@@ -2,13 +2,15 @@ package Controllers
 
 import (
 	"fmt"
+	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/CreateUser"
 	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/GetUsers"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 type UserController struct {
-	GetUsersUseCase GetUsers.Query
+	GetUsersUseCase   GetUsers.Query
+	CreateUserUseCase CreateUser.UseCase
 }
 
 func (userController UserController) LoadUserControllerEndpoints(router *gin.Engine) {
@@ -26,5 +28,14 @@ func (userController UserController) getUsers(context *gin.Context) {
 }
 
 func (userController UserController) postUsers(context *gin.Context) {
-	context.String(http.StatusOK, fmt.Sprintf("creando user"))
+	var command = CreateUser.Command{
+		Nickname: "new",
+		Email:    "new",
+		Password: "new",
+	}
+	user, err := userController.CreateUserUseCase.CreateUserUseCase(command)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, "")
+	}
+	context.JSON(http.StatusOK, user)
 }

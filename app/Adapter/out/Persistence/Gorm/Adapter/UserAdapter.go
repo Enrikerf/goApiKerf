@@ -16,3 +16,7 @@ func (service UsersAdapter) GetUsers() []Domain.User {
 	var domainUsers []Domain.User
 	return domainUsers
 }
+
+func (service UsersAdapter) SaveUser(user Domain.User) (Domain.User,error) {
+	return user,nil
+}
