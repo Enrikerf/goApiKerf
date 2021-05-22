@@ -2,15 +2,17 @@ package Adapter
 
 import (
 	"github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Models"
+	"github.com/Enrikerf/goApiKerf/app/Domain"
 	"gorm.io/gorm"
 )
 
-type GetUsersAdapter struct {
+type UsersAdapter struct {
 	Orm *gorm.DB
 }
 
-func (service GetUsersAdapter) Get() []Models.User {
+func (service UsersAdapter) GetUsers() []Domain.User {
 	var users []Models.User
 	service.Orm.Find(&users)
-	return users
+	var domainUsers []Domain.User
+	return domainUsers
 }

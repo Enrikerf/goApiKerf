@@ -7,12 +7,12 @@ import (
 	"os"
 )
 
-type Server struct {
+type GinServer struct {
 	ApiGin ApiGin
 }
 
-func (server *Server) Run() {
-	server.ApiGin = ApiGin{}
+func (server *GinServer) Run() {
+
 	var err = godotenv.Load()
 
 	if err != nil {
@@ -21,6 +21,7 @@ func (server *Server) Run() {
 		fmt.Println("We are getting the env values")
 	}
 
+	server.ApiGin = ApiGin{}
 	server.ApiGin.Initialize(
 		os.Getenv("SERVER_PORT"),
 		os.Getenv("DB_USER"),

@@ -2,13 +2,13 @@ package Controllers
 
 import (
 	"fmt"
-	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/GetUsersUseCase"
+	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/GetUsers"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 type UserController struct {
-	GetUsersUseCase GetUsersUseCase.Query
+	GetUsersUseCase GetUsers.Query
 }
 
 func (userController UserController) LoadUserControllerEndpoints(router *gin.Engine) {
@@ -20,7 +20,7 @@ func (userController UserController) LoadUserControllerEndpoints(router *gin.Eng
 }
 
 func (userController UserController) getUsers(context *gin.Context) {
-	var users = userController.GetUsersUseCase.Get()
+	var users = userController.GetUsersUseCase.GetUsersQuery()
 	fmt.Println("{}", users)
 	context.JSON(http.StatusOK, users)
 }

@@ -6,6 +6,6 @@ import (
 
 func main() {
 	//ApiMux.Run()
-	var ginServer = Config.Server{}
+	var ginServer = Config.GinServer{}
 	ginServer.Run()
 }

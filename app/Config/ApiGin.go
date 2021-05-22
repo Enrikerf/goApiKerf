@@ -11,13 +11,13 @@ import (
 )
 
 type ApiGin struct {
-	DB     *gorm.DB
-	Engine *gin.Engine
-	port   string
+	DB         *gorm.DB
+	Engine     *gin.Engine
+	portNumber string
 }
 
-func (apiGin *ApiGin) Initialize(serverPort, dbUser, dbPassword, dbPort, dbHost, dbName string) {
-	apiGin.port = serverPort
+func (apiGin *ApiGin) Initialize(serverPortNumber, dbUser, dbPassword, dbPort, dbHost, dbName string) {
+	apiGin.portNumber = serverPortNumber
 	apiGin.Engine = gin.Default()
 	var err error
 	err = godotenv.Load()
@@ -43,6 +43,6 @@ func (apiGin *ApiGin) Initialize(serverPort, dbUser, dbPassword, dbPort, dbHost,
 }
 
 func (apiGin *ApiGin) Run() {
-	fmt.Printf("listening on port: %s", apiGin.port)
-	log.Fatal(apiGin.Engine.Run(apiGin.port))
+	fmt.Printf("listening on portNumber: %s", apiGin.portNumber)
+	log.Fatal(apiGin.Engine.Run(apiGin.portNumber))
 }

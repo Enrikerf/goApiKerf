@@ -1,7 +1,9 @@
 package Users
 
-import "github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Models"
+import (
+	"github.com/Enrikerf/goApiKerf/app/Domain"
+)
 
 type GetUsersPort interface{
-	Get() []Models.User
+	GetUsers() []Domain.User
 }
