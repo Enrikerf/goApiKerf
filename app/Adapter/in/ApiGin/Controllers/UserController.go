@@ -28,14 +28,16 @@ func (userController UserController) getUsers(context *gin.Context) {
 }
 
 func (userController UserController) postUsers(context *gin.Context) {
-	var command = CreateUser.Command{
-		Nickname: "new",
-		Email:    "new",
-		Password: "new",
+	var command CreateUser.Command
+	err2 := context.BindJSON(&command)
+	if err2 != nil {
+		context.AbortWithStatus(http.StatusBadRequest)
+		return
 	}
+
 	user, err := userController.CreateUserUseCase.CreateUserUseCase(command)
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, "")
+		context.AbortWithStatus(http.StatusInternalServerError)
 	}
 	context.JSON(http.StatusOK, user)
 }

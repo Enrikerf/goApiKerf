@@ -6,6 +6,7 @@ reference: [attach debbuger](https://www.jetbrains.com/help/go/attach-to-running
 > go build -gcflags="-N -l" -o debugApp.sh
 
 if the name is app the compiled will be named /app/goApiKerf (the name of de project)
+echo 0 > /proc/sys/kernel/yama/ptrace_scope if you get permissions problems attaching process to debugger
 
 
 

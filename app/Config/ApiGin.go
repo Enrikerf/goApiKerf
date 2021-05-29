@@ -2,6 +2,7 @@ package Config
 
 import (
 	"fmt"
+	"github.com/Enrikerf/goApiKerf/app/Adapter/out/Persistence/Gorm/Models"
 	"github.com/Enrikerf/goApiKerf/app/Config/Routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -38,6 +39,12 @@ func (apiGin *ApiGin) Initialize(serverPortNumber, dbUser, dbPassword, dbPort, d
 	if err != nil {
 		fmt.Println(err.Error())
 		panic("failed to connect database")
+	}
+
+	err = db.AutoMigrate(&Models.User{})
+	if err != nil {
+		fmt.Println(err.Error())
+		panic("failed to migrate database")
 	}
 	Routes.ConfigUserRoutes(apiGin.Engine, db)
 }
