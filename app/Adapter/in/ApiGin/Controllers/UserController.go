@@ -2,13 +2,15 @@ package Controllers
 
 import (
 	"fmt"
-	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/GetUsersUseCase"
+	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/CreateUser"
+	"github.com/Enrikerf/goApiKerf/app/Application/Port/in/User/GetUsers"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 type UserController struct {
-	GetUsersUseCase GetUsersUseCase.Query
+	GetUsersUseCase   GetUsers.Query
+	CreateUserUseCase CreateUser.UseCase
 }
 
 func (userController UserController) LoadUserControllerEndpoints(router *gin.Engine) {
@@ -20,9 +22,22 @@ func (userController UserController) LoadUserControllerEndpoints(router *gin.Eng
 }
 
 func (userController UserController) getUsers(context *gin.Context) {
-	context.String(http.StatusOK, fmt.Sprintf(userController.GetUsersUseCase.Get()))
+	var users = userController.GetUsersUseCase.GetUsersQuery()
+	fmt.Println("{}", users)
+	context.JSON(http.StatusOK, users)
 }
 
 func (userController UserController) postUsers(context *gin.Context) {
-	context.String(http.StatusOK, fmt.Sprintf("creando user"))
+	var command CreateUser.Command
+	err2 := context.BindJSON(&command)
+	if err2 != nil {
+		context.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	user, err := userController.CreateUserUseCase.CreateUserUseCase(command)
+	if err != nil {
+		context.AbortWithStatus(http.StatusInternalServerError)
+	}
+	context.JSON(http.StatusOK, user)
 }
