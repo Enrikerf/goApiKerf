@@ -2,18 +2,21 @@ package Models
 
 import (
 	"errors"
+	"github.com/google/uuid"
+	"gorm.io/gorm"
 	"html"
 	"log"
 	"strings"
 	"time"
 
 	"github.com/badoux/checkmail"
-	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
-	ID        uint32    `gorm:"primary_key;auto_increment" json:"id"`
+	ID        uuid.UUID `gorm:"primary_key; unique; 
+                      type:uuid; column:id; 
+                      default:uuid_generate_v4()"`
 	Nickname  string    `gorm:"size:255;not null;unique" json:"nickname"`
 	Email     string    `gorm:"size:100;not null;unique" json:"email"`
 	Password  string    `gorm:"size:100;not null;" json:"password"`
@@ -29,7 +32,16 @@ func VerifyPassword(hashedPassword, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
-func (u *User) BeforeSave() error {
+func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
+	u.ID = uuid.New()
+
+	//if !u.Validate("") {
+	//	err = errors.New("can't save invalid data")
+	//}
+	return
+}
+
+func (u *User) BeforeSave(db *gorm.DB) error {
 	hashedPassword, err := Hash(u.Password)
 	if err != nil {
 		return err
@@ -39,7 +51,6 @@ func (u *User) BeforeSave() error {
 }
 
 func (u *User) Prepare() {
-	u.ID = 0
 	u.Nickname = html.EscapeString(strings.TrimSpace(u.Nickname))
 	u.Email = html.EscapeString(strings.TrimSpace(u.Email))
 	u.CreatedAt = time.Now()
@@ -118,16 +129,16 @@ func (u *User) FindUserByID(db *gorm.DB, uid uint32) (*User, error) {
 	if err != nil {
 		return &User{}, err
 	}
-	if gorm.IsRecordNotFoundError(err) {
-		return &User{}, errors.New("User Not Found")
-	}
+	//if gorm.IsRecordNotFoundError(err) {
+	//	return &User{}, errors.New("User Not Found")
+	//}
 	return u, err
 }
 
 func (u *User) UpdateAUser(db *gorm.DB, uid uint32) (*User, error) {
 
 	// To hash the password
-	err := u.BeforeSave()
+	err := u.BeforeSave(db)
 	if err != nil {
 		log.Fatal(err)
 	}

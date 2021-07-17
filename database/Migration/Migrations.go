@@ -1,0 +1,5 @@
+package Migration
+
+func Migrate()  {
+
+}
