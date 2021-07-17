@@ -18,6 +18,7 @@ func (userController UserController) LoadUserControllerEndpoints(router *gin.Eng
 	{
 		v1.GET("", userController.getUsers)
 		v1.POST("", userController.postUsers)
+		v1.GET("/comm", userController.postUsers)
 	}
 }
 
@@ -40,4 +41,8 @@ func (userController UserController) postUsers(context *gin.Context) {
 		context.AbortWithStatus(http.StatusInternalServerError)
 	}
 	context.JSON(http.StatusOK, user)
+}
+
+func comm(context *gin.Context) {
+
 }
